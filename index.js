@@ -10,6 +10,13 @@ app.use(cors());
 app.use(express.json());
 
 
+
+// user: dbuser1
+// password: TQ5NJyagnGzgDnfn
+
+
+
+
 //4
 app.get('/', (req, res) => {
     res.send('Running my Node CRUD Server')
