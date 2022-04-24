@@ -16,22 +16,37 @@ app.use(express.json());
 // user: dbuser1
 // password: TQ5NJyagnGzgDnfn
 
-//mongodb codes----------------
+//mongodb codes start-------------------------
 
 
 
 const uri = "mongodb+srv://dbuser1:TQ5NJyagnGzgDnfn@cluster0.mdrpi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-    const collection = client.db("foodExpress").collection("users");
-    console.log('db connected');
-    // perform actions on the collection object
-    client.close();
-});
 
+async function run() {
 
+    try {
+        await client.connect();
+        const userCollection = client.db("foodExpress").collection("user");
 
+        const user = { name: 'monona nodi', email: 'mohonanodi@gmail.com' };
 
+        const result = await userCollection.insertOne(user);
+
+        console.log(`user inserted  with id ${result.insertedId}`)
+
+    }
+    finally {
+        // continue database use korle  client.close() use kora jaba na
+        // await client.close();
+    }
+
+}
+
+// call function 
+run().catch(console.dir);
+
+//mongodb codes End-------------------------------
 
 
 //4
