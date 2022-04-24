@@ -23,17 +23,23 @@ app.use(express.json());
 const uri = "mongodb+srv://dbuser1:TQ5NJyagnGzgDnfn@cluster0.mdrpi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+// send data function 
 async function run() {
 
     try {
         await client.connect();
         const userCollection = client.db("foodExpress").collection("user");
 
-        const user = { name: 'monona nodi', email: 'mohonanodi@gmail.com' };
+        // post a data------
+        app.post('/user', (req, res) => {
+            console.log('post add option add')
+        });
 
+
+
+        /* const user = { name: 'monona nodi', email: 'mohonanodi@gmail.com' };
         const result = await userCollection.insertOne(user);
-
-        console.log(`user inserted  with id ${result.insertedId}`)
+        console.log(`user inserted  with id ${result.insertedId}`) */
 
     }
     finally {
@@ -45,6 +51,8 @@ async function run() {
 
 // call function 
 run().catch(console.dir);
+
+
 
 //mongodb codes End-------------------------------
 
