@@ -28,12 +28,32 @@ async function run() {
         await client.connect();
         const userCollection = client.db("foodExpress").collection("user");
 
+        // data load
+        app.get('/user', async (req, res) => {
+            const query = {};
+
+            const cursor = userCollection.find(query);
+
+            const users = await cursor.toArray();
+            res.send(users)
+
+        })
+
+
+
+
         // post a data-----(get data from client side)-***************************************
-        app.post('/user', (req, res) => {
+        // POST user: add a new user
+        app.post('/user', async (req, res) => {
 
             const newUser = req.body;
             console.log('adding new user', newUser);
-            res.send({ result: 'success' })     //json structure return
+
+            const result = await userCollection.insertOne(newUser);
+
+            //json structure return
+            // res.send({ result: 'success' })     
+            res.send(result)
         });
 
 
