@@ -33,7 +33,7 @@ async function run() {
 
             const newUser = req.body;
             console.log('adding new user', newUser);
-            res.send({ result: 'success' })
+            res.send({ result: 'success' })     //json structure return
         });
 
 
