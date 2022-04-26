@@ -41,6 +41,11 @@ async function run() {
 
         })
 
+        // update a single user------------------------*******
+
+        app.get('/user/:id',)
+
+
 
         // post a data-----(get data from client side)-***************************************
         // POST user: add a new user
@@ -58,11 +63,13 @@ async function run() {
 
 
         //delate  user------------------------------------*******
-        app.delete('user/:id', async (req, res) => {
+        app.delete('/user/:id', async (req, res) => {
 
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
 
+            const result = await userCollection.deleteOne(query);
+            res.send(result);
 
         })
 
