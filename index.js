@@ -43,7 +43,16 @@ async function run() {
 
         // update a single user------------------------*******
 
-        app.get('/user/:id',)
+        app.get('/user/:id', async (req, res) => {
+            // get selected id 
+            const id = req.params.id;
+
+            //set selected id for update action
+            const query = { _id: ObjectId(id) };
+            // set data all user_property(variable)
+            const result = await userCollection.findOne(query);
+            res.send(result);
+        })
 
 
 
