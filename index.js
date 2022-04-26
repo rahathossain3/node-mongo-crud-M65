@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors'); // for cors
 const { MongoClient, ServerApiVersion } = require('mongodb');   //mongodb
 
+const ObjectId = require('mongodb').ObjectId;   // use for delete
+
 const app = express();
 const port = process.env.PROT || 5000;
 
@@ -28,7 +30,7 @@ async function run() {
         await client.connect();
         const userCollection = client.db("foodExpress").collection("user");
 
-        // data load
+        // data load / get user-------------------------********
         app.get('/user', async (req, res) => {
             const query = {};
 
@@ -38,8 +40,6 @@ async function run() {
             res.send(users)
 
         })
-
-
 
 
         // post a data-----(get data from client side)-***************************************
@@ -55,6 +55,17 @@ async function run() {
             // res.send({ result: 'success' })     
             res.send(result)
         });
+
+
+        //delate  user------------------------------------*******
+        app.delete('user/:id', async (req, res) => {
+
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+
+
+        })
+
 
 
         /* const user = { name: 'monona nodi', email: 'mohonanodi@gmail.com' };
