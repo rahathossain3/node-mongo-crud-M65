@@ -62,7 +62,7 @@ async function run() {
         });
 
 
-        //delate  user------------------------------------*******
+        //delete  user------------------------------------*******
         app.delete('/user/:id', async (req, res) => {
 
             const id = req.params.id;
